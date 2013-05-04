@@ -6,8 +6,49 @@
 		<link rel="stylesheet" type="text/css" href="style/style.css" />
 		<link rel="stylesheet" type="text/css" href="plugins/foundation/css/foundation.css" />
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script type="text/javascript" src="next-housing.js"></script>
 		<script src='https://cdn.firebase.com/v0/firebase.js'></script>
+		<!--
+			<script type="text/javascript" src="next-housing.js"></script>
+		-->
+		<script>
+			// to be moved to a seperate file later, I'm a little lazy
+			function nameTag(n){
+				return "<span class='nametag'>" + n + "</span>";
+			}
+
+			$(document).ready(function(){
+				var numRooms = 74;
+				var html = "<table>";
+				html += "<tr><th>Room</th><th>Top Occupant</th></tr>";
+				for (i = 1; i < numRooms; i ++){
+					roomNum = i + 200;
+					html += "<tr>";
+					html += "<td>" + roomNum + "</td>";
+					html += "<td id='room" + roomNum +"'>empty</td>";
+					html += "</tr>";
+					console.log(html);
+				}
+				html += "</table>"
+				$("#floor2 .roomlisting").html(html);
+
+
+				var data = new Firebase('https://kyc.firebaseIO.com/');
+				data.on('value', function(snapshot) {
+					obj = snapshot.val();
+					for (k in Object.keys(obj.rooms)){
+						roomNum = Object.keys(obj.rooms)[k]
+						contestantslist = Object.keys(obj.rooms[roomNum]);
+						html = ""
+						for (i in contestantslist){
+							html += nameTag(contestantslist[i]);
+						}
+						$("#room" + roomNum).html(html);
+					}
+
+				});
+
+			});
+		</script>
 	</head>
 	<body>
 		<div class="row">
@@ -25,18 +66,9 @@
 				</p>
 		 	</div>
 		</div>
-		<div class="row">
+		<div id="floor2" class="row">
 			<div class="large-2 columns roomlisting">
-				<table>
-					<tr>
-						<td>201</td>
-						<td>(empty)</td>
-					</tr>
-					<tr>
-						<td>202</td>
-						<td>(empty)</td>
-					</tr>
-				</table>
+				<!-- roomlistings -->
 			</div>
 			<div class="large-10 columns">
 				<div class='map'>

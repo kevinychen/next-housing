@@ -24,3 +24,19 @@ h2{
   background-color: #eeeeee;
   padding: 15px;
 }
+span.nametag{
+  padding: 2px 5px;
+  background-color: #2ED195;
+  font-size: 12px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  margin-right: 10px;
+}
+td{
+  padding: 2px;
+}
+th{
+  text-align: left;
+  font-weight: bold;
+  padding: 2px;
+}
