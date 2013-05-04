@@ -17,6 +17,8 @@ data.on('value', function(snapshot) {
     dat = snapshot.val();
     myRank = dat.ranks[myName].rank // Change after parsing site.
     myYear = dat.ranks[myName].year // Change after parsing site.
+                $("#yourrank").text(myRank);
+                $("#youryear").text(myYear);
 });
 
 chosenRooms = new Array();

@@ -177,3 +177,8 @@ tr a:hover{
   text-align: center;
   margin-bottom: 5px;
 }
+
+#sidenote{
+  font-size: 12px;
+  opacity: 0.6;
+}
