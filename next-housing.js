@@ -45,7 +45,7 @@ OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
             }
         }
 
-        var val = $('input[name=priority]:checked').val();
+        var val = currSelectRoom;
         if (val) {
             chooseRoom(minRoom, parseInt(val), true);
         }
@@ -117,6 +117,7 @@ function chooseRoom(room, priority, update) {
     }
     $('#priority' + priority).toggle();
     $('#remove' + priority).html('Room ' + room + '<a href="#" id="remove' + priority + '">Remove</a>');
+    $('#choice' + priority).hide();
     document.getElementById('remove' + priority).onclick = function() {
         deletePriority(priority, true);
     }

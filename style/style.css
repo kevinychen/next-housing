@@ -21,8 +21,6 @@ h2{
 .map{
   top: 14px;
   margin-top: 20px;
-  padding: 20px;
-  border: #dddddd 1px solid;
 }
 .roomlisting{
   background-color: #eeeeee;
@@ -73,6 +71,10 @@ th{
 tr:hover{
   background-color: #ffffff;
 }
+tr{
+  border-bottom: 1px solid #dddddd;
+  padding: 5px;
+}
 .floorbtn{
   text-align: center;
   background-color: #FFD829;
@@ -109,6 +111,7 @@ tr a:hover{
   color: #cccccc;
   background-color: #333333;
   padding: 10px;
+  z-index: 99;
 }
 #shortcuts{
   float: right;
