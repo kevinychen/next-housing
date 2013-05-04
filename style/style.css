@@ -3,7 +3,7 @@ body
   font-family: "Lucida Grande", "Arial", Serif;
 }
 h1{
-  font-size: 30px;
+  font-size: 20px;
   background-color: #eeeeee;
   padding: 15px;
   color: #666666;
@@ -101,4 +101,39 @@ tr a, tr a:visited{
 }
 tr a:hover{
   color: #999999;
+}
+#footer{
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  color: #cccccc;
+  background-color: #333333;
+  padding: 10px;
+}
+#shortcuts{
+  float: right;
+}
+#shortcuts a, #shortcuts a:visited{
+  text-decoration: none;
+  color: #cccccc;
+  background-color: #555555;
+  padding: 4px;
+
+}
+#shortcuts a:hover{
+  color: #ffffff;
+  background-color: #777777;
+}
+.choiceRoomBtn{
+  padding: 3px;
+  color: #ffffff;
+  background-color: #FFBA24;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-left: 5px;
+}
+.choiceRoomBtn:hover{
+  cursor: pointer;
+  opacity: 0.6;
 }
