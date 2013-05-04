@@ -16,7 +16,6 @@ h2{
   padding: 10px 15px 10px 15px;
   background-color: #FFBA24;
   color: #000000;
-  height: 60px;
 }
 .map{
   top: 14px;
@@ -181,4 +180,7 @@ tr a:hover{
 #sidenote{
   font-size: 12px;
   opacity: 0.6;
+}
+.yeartag{
+  opacity: 0.3;
 }
