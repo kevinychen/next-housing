@@ -464,34 +464,45 @@ data.on('value', function (snapshot) {
             pointFeature.attributes = {
                 name: snapshot2.name()
             };
+
+            /* Update map [priority, name, feature] */
             layers = [layer2, layer3, layer4, layer5];
-            var first = true;
-            if (features[roomNum]) {
-                for (var i = 0; i < features[roomNum].length; i++) {
-                    if (snapshot2.getPriority() < features[roomNum][i][0]) {
-                    layers[~~(roomNum / 100) - 2].removeFeatures([features[roomNum][i][2]]);
-                    } else {
-                        first = false;
-                    }
-                }
-            } else {
+            if (!features[roomNum]) {
                 features[roomNum] = new Array();
             }
-            if (first) {
-                features[roomNum].push([snapshot2.getPriority(), name, pointFeature]);
-                layers[~~(roomNum / 100) - 2].addFeatures([pointFeature]);
+            features[roomNum].push([snapshot2.getPriority(), name, pointFeature]);
+            for (var i = 0; i < features[roomNum].length; i++) {
+                layers[~~(roomNum / 100) - 2].removeFeatures([features[roomNum][i][2]]);
             }
+            var topContestant = 0;
+            for (var i = 0; i < features[roomNum].length; i++) {
+                if (features[roomNum][i][0] < features[roomNum][topContestant][0]) {
+                    topContestant = i;
+                }
+            }
+            layers[~~(roomNum / 100) - 2].addFeatures([features[roomNum][topContestant][2]]);
         });
         data.child('rooms').child(roomNumT).on('child_removed', function(snapshot2) {
             var roomNumStr = snapshot2.ref().parent().toString();
             var roomNum = parseInt(roomNumStr.substring(roomNumStr.lastIndexOf('/') + 1));
             var name = snapshot2.name();
+
             for (var i = 0; i < features[roomNum].length; i++) {
+                layers[~~(roomNum / 100) - 2].removeFeatures([features[roomNum][i][2]]);
                 if (features[roomNum][i][1] == name) {
-                    layers = [layer2, layer3, layer4, layer5];
-                    layers[~~(roomNum / 100) - 2].removeFeatures([features[roomNum][i][2]]);
+                    features[roomNum].splice(i);
                 }
             }
+            for (var i = 0; i < features[roomNum].length; i++) {
+            layers[~~(roomNum / 100) - 2].removeFeatures([features[roomNum][i][2]]);
+            }
+            var topContestant = 0;
+            for (var i = 0; i < features[roomNum].length; i++) {
+                if (features[roomNum][i][0] < features[roomNum][topContestant][0]) {
+                    topContestant = i;
+                }
+            }
+            layers[~~(roomNum / 100) - 2].addFeatures([features[roomNum][topContestant][2]]);
         });
     }
 });
