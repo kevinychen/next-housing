@@ -8,6 +8,9 @@
 		<link rel="stylesheet" type="text/css" href="plugins/foundation/css/foundation.css" />
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="OpenLayers.js"></script>
+        <script>
+			myName = "VictorHung" // Change after using AUTH
+        </script>
 		<script src='https://cdn.firebase.com/v0/firebase.js'></script>
 		<script>
 			// to be moved to a seperate file later, I'm a little lazy
@@ -60,7 +63,6 @@
 				data.on('value', function(snapshot) {
 
 					obj = snapshot.val();
-                    console.log(obj);
 					for (k in Object.keys(obj.rooms)){
 						roomNum = Object.keys(obj.rooms)[k]
 						contestantslist = Object.keys(obj.rooms[roomNum]);
@@ -154,7 +156,6 @@
 				});
 
 				$("tr").hover(function(){
-					console.log($(this));
 				});
 
 				$("#choice1").click(function(){
