@@ -447,8 +447,8 @@ function disableChoosing(){
 features = new Array();
 data.on('value', function (snapshot) {
     var obj = snapshot.val();
-    for (i in Object.keys(obj.rooms)) {
-        var roomNumT = Object.keys(obj.rooms)[i];
+    for (j in Object.keys(obj.rooms)) {
+        var roomNumT = Object.keys(obj.rooms)[j];
         data.child('rooms').child(roomNumT).on('child_added', function(snapshot2) {
             var roomNumStr = snapshot2.ref().parent().toString();
             var roomNum = parseInt(roomNumStr.substring(roomNumStr.lastIndexOf('/') + 1));
@@ -462,18 +462,32 @@ data.on('value', function (snapshot) {
             pointFeature.attributes = {
                 name: snapshot2.name()
             };
-            features.push([roomNum, name, pointFeature]);
             layers = [layer2, layer3, layer4, layer5];
-            layers[~~(roomNum / 100) - 2].addFeatures([pointFeature]);
+            var first = true;
+            if (features[roomNum]) {
+                for (var i = 0; i < features[roomNum].length; i++) {
+                    if (snapshot2.getPriority() < features[roomNum][i][0]) {
+                    layers[~~(roomNum / 100) - 2].removeFeatures([features[roomNum][i][2]]);
+                    } else {
+                        first = false;
+                    }
+                }
+            } else {
+                features[roomNum] = new Array();
+            }
+            if (first) {
+                features[roomNum].push([snapshot2.getPriority(), name, pointFeature]);
+                layers[~~(roomNum / 100) - 2].addFeatures([pointFeature]);
+            }
         });
         data.child('rooms').child(roomNumT).on('child_removed', function(snapshot2) {
             var roomNumStr = snapshot2.ref().parent().toString();
             var roomNum = parseInt(roomNumStr.substring(roomNumStr.lastIndexOf('/') + 1));
             var name = snapshot2.name();
-            for (var i = 0; i < features.length; i++) {
-                if (features[i][0] == roomNum && features[i][1] == name) {
+            for (var i = 0; i < features[roomNum].length; i++) {
+                if (features[roomNum][i][1] == name) {
                     layers = [layer2, layer3, layer4, layer5];
-                    layers[~~(roomNum / 100) - 2].removeFeatures([features[i][2]]);
+                    layers[~~(roomNum / 100) - 2].removeFeatures([features[roomNum][i][2]]);
                 }
             }
         });
