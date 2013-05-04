@@ -23,6 +23,8 @@
 
 				var numRooms = 74;
 				currSelectRoom = false;
+				ss = [8, 12, 22, 26, 34, 44, 56, 75];
+				sd = [20, 14, 66, 75];
 
 				for (floor = 2; floor <= 5; floor ++){
 					var html = "<table>";
@@ -30,9 +32,16 @@
 					for (i = 1; i < numRooms; i ++){
 						roomNum = i + floor * 100;
 						html += "<tr>";
+						if (floor > 2 && ss.indexOf(i) > -1){
+							img = "<img src='style/solarsing.png' />";
+						} else if (floor > 2 && sd.indexOf(i) > -1){
+							img = "<img src='style/solardoub.png' />";
+						} else {
+							img = "";
+						}
 
-						html += "<td class='roomnum-table'>" + roomNum + " <img src='style/solarsing.png' /></td>";
-						html += "<td id='room" + roomNum +"'>untaken</td><td class='chooseroombtnlist'><a title='choose this room' href='#' id='plus" + roomNum + "'>+</a></td>";
+						html += "<td class='roomnum-table'>" + roomNum + " " + img + "</td>";
+						html += "<td id='room" + roomNum +"'>none</td><td class='chooseroombtnlist'><a title='choose this room' href='#' id='plus" + roomNum + "'>+</a></td>";
 
 						html += "</tr>";
 					}
