@@ -438,11 +438,14 @@ function disableChoosing(){
 /* Sync with database */
 
 
+features = new Array();
 data.on('value', function (snapshot) {
     var obj = snapshot.val();
     for (i in Object.keys(obj.rooms)) {
-        var roomNum = Object.keys(obj.rooms)[i];
-        data.child('rooms').child(roomNum).on('child_added', function(snapshot2) {
+        var roomNumT = Object.keys(obj.rooms)[i];
+        data.child('rooms').child(roomNumT).on('child_added', function(snapshot2) {
+            var roomNumStr = snapshot2.ref().parent().toString();
+            var roomNum = parseInt(roomNumStr.substring(roomNumStr.lastIndexOf('/') + 1));
             var name = snapshot2.name();
             if (name == myName) {
                 chooseRoom(roomNum, snapshot2.val().priority, false);
@@ -453,14 +456,20 @@ data.on('value', function (snapshot) {
             pointFeature.attributes = {
                 name: snapshot2.name()
             };
+            features.push([roomNum, name, pointFeature]);
             layers = [layer2, layer3, layer4, layer5];
             layers[~~(roomNum / 100) - 2].addFeatures([pointFeature]);
         });
-        data.child('rooms').child(roomNum).on('child_removed', function(snapshot2) {
-            var point = new OpenLayers.Geometry.Point(lons[roomNum], lats[roomNum]);
-            var pointFeature = new OpenLayers.Feature.Vector(point);
-            layers = [layer2, layer3, layer4, layer5];
-            layers[~~(roomNum / 100) - 2].removeFeatures([pointFeature]);
+        data.child('rooms').child(roomNumT).on('child_removed', function(snapshot2) {
+            var roomNumStr = snapshot2.ref().parent().toString();
+            var roomNum = parseInt(roomNumStr.substring(roomNumStr.lastIndexOf('/') + 1));
+            var name = snapshot2.name();
+            for (var i = 0; i < features.length; i++) {
+                if (features[i][0] == roomNum && features[i][1] == name) {
+                    layers = [layer2, layer3, layer4, layer5];
+                    layers[~~(roomNum / 100) - 2].removeFeatures([features[i][2]]);
+                }
+            }
         });
     }
 });
