@@ -33,7 +33,7 @@ function init() {
     var renderer = OpenLayers.Util.getParameters(window.location.href).renderer;
     renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;
 	layer2 = new OpenLayers.Layer.Vector("Simple Geometry", {
-        styleMap: new OpenLayers.StyleMap({'default':{
+        styleMap: new OpenLayers.StyleMap(new OpenLayers.Style({
             strokeColor: "#00FF00",
             strokeOpacity: 1,
             strokeWidth: 3,
@@ -44,12 +44,16 @@ function init() {
             label: "${name}",
 
             fontColor: "black",
-            fontSize: "20px",
+            fontSize: "${getFontSize}",
             fontFamily: "Courier New, monospace",
             fontWeight: "bold",
             labelOutlineColor: "white",
             labelOutlineWidth: 3
-        }}),
+        }, {context:{
+            getFontSize : function() {
+                return (map2.getZoom() * 8 + 10) + "px";
+            }
+        }})),
             renderers: renderer
     });
 
@@ -120,7 +124,7 @@ function init() {
     var renderer = OpenLayers.Util.getParameters(window.location.href).renderer;
     renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;
 	layer3 = new OpenLayers.Layer.Vector("Simple Geometry", {
-        styleMap: new OpenLayers.StyleMap({'default':{
+        styleMap: new OpenLayers.StyleMap(new OpenLayers.Style({
             strokeColor: "#00FF00",
             strokeOpacity: 1,
             strokeWidth: 3,
@@ -131,12 +135,16 @@ function init() {
             label: "${name}",
 
             fontColor: "black",
-            fontSize: "20px",
+            fontSize: "${getFontSize}",
             fontFamily: "Courier New, monospace",
             fontWeight: "bold",
             labelOutlineColor: "white",
             labelOutlineWidth: 3
-        }}),
+        }, {context:{
+            getFontSize : function() {
+                return (map3.getZoom() * 8 + 10) + "px";
+            }
+        }})),
             renderers: renderer
     });
 
@@ -207,7 +215,7 @@ function init() {
     var renderer = OpenLayers.Util.getParameters(window.location.href).renderer;
     renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;
 	layer4 = new OpenLayers.Layer.Vector("Simple Geometry", {
-        styleMap: new OpenLayers.StyleMap({'default':{
+        styleMap: new OpenLayers.StyleMap(new OpenLayers.Style({
             strokeColor: "#00FF00",
             strokeOpacity: 1,
             strokeWidth: 3,
@@ -218,12 +226,16 @@ function init() {
             label: "${name}",
 
             fontColor: "black",
-            fontSize: "20px",
+            fontSize: "${getFontSize}",
             fontFamily: "Courier New, monospace",
             fontWeight: "bold",
             labelOutlineColor: "white",
             labelOutlineWidth: 3
-        }}),
+        }, {context:{
+            getFontSize : function() {
+                return (map4.getZoom() * 8 + 10) + "px";
+            }
+        }})),
             renderers: renderer
     });
 
@@ -294,7 +306,7 @@ function init() {
     var renderer = OpenLayers.Util.getParameters(window.location.href).renderer;
     renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;
 	layer5 = new OpenLayers.Layer.Vector("Simple Geometry", {
-        styleMap: new OpenLayers.StyleMap({'default':{
+        styleMap: new OpenLayers.StyleMap(new OpenLayers.Style({
             strokeColor: "#00FF00",
             strokeOpacity: 1,
             strokeWidth: 3,
@@ -305,12 +317,16 @@ function init() {
             label: "${name}",
 
             fontColor: "black",
-            fontSize: "20px",
+            fontSize: "${getFontSize}",
             fontFamily: "Courier New, monospace",
             fontWeight: "bold",
             labelOutlineColor: "white",
             labelOutlineWidth: 3
-        }}),
+        }, {context:{
+            getFontSize : function() {
+                return (map5.getZoom() * 8 + 10) + "px";
+            }
+        }})),
             renderers: renderer
     });
 
