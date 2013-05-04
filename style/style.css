@@ -100,6 +100,8 @@ tr a, tr a:visited{
   font-weight: bold;
   font-size: 12px;
   color: #666666;
+  padding: 1px 4px;
+  background-color: #ffffff;
 }
 tr a:hover{
   color: #999999;
@@ -111,7 +113,7 @@ tr a:hover{
   color: #cccccc;
   background-color: #333333;
   padding: 10px;
-  z-index: 99;
+  z-index: 200;
 }
 #shortcuts{
   float: right;
@@ -152,4 +154,16 @@ tr a:hover{
   color: #ED5826;
   font-size: 12px;
   vertical-align: center;
+}
+#oops{
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  font-size: 12px;
+  padding: 10px;
+  color: #333333;
+  background-color: #eeeeee;
+  border: 1px solid #333333;
+  border-style: none none solid solid;
+  z-index: 9001;
 }

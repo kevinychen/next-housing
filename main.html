@@ -21,30 +21,36 @@
 
 			$(document).ready(function(){
 
-				var numRooms = 74;
+				var numRooms = 77;
 				currSelectRoom = false;
 
 				ss = [8, 12, 22, 26, 34, 44, 56, 75];
 				sd = [20, 14, 66, 75];
+				dne = [228, 229, 230, 217, 245, 247, 248, 249, 255, 267, 273,
+						317, 345, 347, 348, 349, 367, 373,
+						417, 445, 447, 448, 449, 467, 473,
+						517, 545, 547, 548, 549, 567, 573];
 
 				for (floor = 2; floor <= 5; floor ++){
 					var html = "<table>";
 					html += "<tr><th>Room</th><th>Contestants</th></tr>";
 					for (i = 1; i < numRooms; i ++){
 						roomNum = i + floor * 100;
-						html += "<tr>";
-						if (floor > 2 && ss.indexOf(i) > -1){
-							img = "<img src='style/solarsing.png' />";
-						} else if (floor > 2 && sd.indexOf(i) > -1){
-							img = "<img src='style/solardoub.png' />";
-						} else {
-							img = "";
+						if (dne.indexOf(roomNum) == -1){
+							html += "<tr>";
+							if (floor > 2 && ss.indexOf(i) > -1){
+								img = "<img src='style/solarsing.png' />";
+							} else if (floor > 2 && sd.indexOf(i) > -1){
+								img = "<img src='style/solardoub.png' />";
+							} else {
+								img = "";
+							}
+
+							html += "<td class='roomnum-table'>" + roomNum + " " + img + "</td>";
+							html += "<td id='room" + roomNum +"'>none</td><td class='chooseroombtnlist'><a title='choose this room' href='#' id='plus" + roomNum + "'>+</a></td>";
+
+							html += "</tr>";
 						}
-
-						html += "<td class='roomnum-table'>" + roomNum + " " + img + "</td>";
-						html += "<td id='room" + roomNum +"'>none</td><td class='chooseroombtnlist'><a title='choose this room' href='#' id='plus" + roomNum + "'>+</a></td>";
-
-						html += "</tr>";
 					}
 					html += "</table>";
 					$("#floor" + floor + " .roomlisting").html(html);
@@ -109,7 +115,7 @@
 						$("#floorheader2").css({"z-index": "100"});
 					} else {
 						$("#floorheader2").css({"position": "relative"});
-						$("#floorheader2").css({"z-index": "-1"});
+						//$("#floorheader2").css({"z-index": "-4"});
 					}
 
 					if (window.pageYOffset > f3){
@@ -118,7 +124,7 @@
 						$("#floorheader3").css({"z-index": "101"});
 					} else {
 						$("#floorheader3").css({"position": "relative"});
-						$("#floorheader3").css({"z-index": "-1"});
+						//$("#floorheader3").css({"z-index": "-3"});
 					}
 
 					if (window.pageYOffset > f4){
@@ -127,7 +133,7 @@
 						$("#floorheader4").css({"z-index": "102"});
 					} else {
 						$("#floorheader4").css({"position": "relative"});
-						$("#floorheader4").css({"z-index": "-1"});
+						//$("#floorheader4").css({"z-index": "-2"});
 					}
 
 					if (window.pageYOffset > f5){
@@ -136,7 +142,7 @@
 						$("#floorheader5").css({"z-index": "103"});
 					} else {
 						$("#floorheader5").css({"position": "relative"});
-						$("#floorheader5").css({"z-index": "-1"});
+						//$("#floorheader5").css({"z-index": "-1"});
 					}
 
 				});
@@ -308,5 +314,8 @@
 				<a href="#floor5anchor">Floor 5</a>
 			</div>
 		</div>
+				<div id='oops'>
+					Errors? contact vhung@mit.edu
+				</div>
 	</body>
 </html>
