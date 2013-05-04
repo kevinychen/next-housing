@@ -24,13 +24,39 @@ h2{
   background-color: #eeeeee;
   padding: 15px;
 }
-span.nametag{
+.roomnum-table{
+  text-align: center;
+}
+.floorheaders{
+  padding: 10px;
+  font-size: 20px;
+  background-color: #333333;
+  color: #cccccc;
+}
+.nametag{
   padding: 2px 5px;
   background-color: #2ED195;
   font-size: 12px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  margin-right: 10px;
+  margin-right: 5px;
+  display: inline-block;
+}
+.moretag{
+  padding: 2px 5px;
+  background-color: #666666;
+  font-size: 11px;
+  color: #cccccc;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  display: inline-block;
+}
+.moretag:hover{
+  cursor: pointer;
+}
+span.rank{
+  color: #ffffff;
+  margin-right: 3px;
 }
 td{
   padding: 2px;

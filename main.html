@@ -12,21 +12,23 @@
 		-->
 		<script>
 			// to be moved to a seperate file later, I'm a little lazy
-			function nameTag(n){
-				return "<span class='nametag'>" + n + "</span>";
+			function nameTag(r, n){
+				return "<div class='nametag'><span class='rank'>" + r + "</span>" + n + "</div>";
+			}
+			function moreTag(roomNum,k){
+				return "<div id='fullroombtn" + roomNum + "' class='hiddenlistbtn moretag'>+ " + k +" more</div>";
 			}
 
 			$(document).ready(function(){
 				var numRooms = 74;
 				var html = "<table>";
-				html += "<tr><th>Room</th><th>Top Occupant</th></tr>";
+				html += "<tr><th>Room</th><th>Contestants</th></tr>";
 				for (i = 1; i < numRooms; i ++){
 					roomNum = i + 200;
 					html += "<tr>";
-					html += "<td>" + roomNum + "</td>";
-					html += "<td id='room" + roomNum +"'>empty</td>";
+					html += "<td class='roomnum-table'>" + roomNum + "</td>";
+					html += "<td id='room" + roomNum +"'>untaken</td>";
 					html += "</tr>";
-					console.log(html);
 				}
 				html += "</table>"
 				$("#floor2 .roomlisting").html(html);
@@ -39,9 +41,36 @@
 						roomNum = Object.keys(obj.rooms)[k]
 						contestantslist = Object.keys(obj.rooms[roomNum]);
 						html = ""
-						for (i in contestantslist){
-							html += nameTag(contestantslist[i]);
+
+						if (contestantslist.length > 0){
+							contestant = contestantslist[0];
+							r = obj.rooms[roomNum][contestant].rank;
+							html += nameTag(r, contestant);
+
+							// if more than one person
+							if (contestantslist.length > 1){
+								html += "<div id='fullroom" + roomNum + "' class='hiddenlist' style='display:none'>";
+								// people who are not the first
+								for (i in contestantslist){
+									if (i != 0){
+										contestant = contestantslist[i];
+										r = obj.rooms[roomNum][contestant].rank;
+										html += nameTag(r, contestantslist[i]);
+									}
+								}
+								nummore = contestantslist.length - 1
+								html += "</div>";
+								html += moreTag(roomNum, nummore);
+
+								selector = $("#fullroombtn" + roomNum);
+								$("#room" + roomNum).on("click", selector, function(){
+									roomid = $(this).attr('id')
+									$("#" + roomid + " .hiddenlist").show();
+									$("#" + roomid + " .hiddenlistbtn").hide();
+								});
+							}
 						}
+
 						$("#room" + roomNum).html(html);
 					}
 
@@ -64,6 +93,11 @@
 				<p>
 					You are going on an adventure. A far away land.
 				</p>
+		 	</div>
+		</div>
+		<div class="row">
+			<div class="large-12 columns floorheaders">
+				FLOOR 2
 		 	</div>
 		</div>
 		<div id="floor2" class="row">
