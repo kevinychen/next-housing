@@ -98,8 +98,8 @@ a{
 }
 tr a, tr a:visited{
   font-weight: bold;
+  font-size: 12px;
   color: #666666;
-  padding: 5px;
 }
 tr a:hover{
   color: #999999;

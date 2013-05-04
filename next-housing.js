@@ -112,6 +112,7 @@ function init() {
                 var roomNumC = id.match(/[0-9]+/)[0];
                 console.log(roomNumC);
                 chooseRoom(roomNumC, currSelectRoom, true);
+                return false;
             });
         }
     }
@@ -130,7 +131,9 @@ function chooseRoom(room, priority, update) {
     $('#remove' + priority).html('Room ' + room + '<a href="#" id="remove' + priority + '">Remove</a>');
     $('#choice' + priority).hide();
     document.getElementById('remove' + priority).onclick = function() {
+        $("#room" + room).html("none");
         deletePriority(priority, true);
+        return false;
     }
     disableChoosing();
 };
