@@ -82,7 +82,7 @@ function init() {
         layers: [
             new OpenLayers.Layer.Image( '3rd Floor', 'http://web.mit.edu/kyc2915/Public/Images/W71_3.png',
                 new OpenLayers.Bounds(-180, -90, 180, 90),
-                new OpenLayers.Size(1600, 900),
+                new OpenLayers.Size(1400, 800),
                 {numZoomLevels: 4, isBaseLayer: true}
             ),
             vectorLayer,
