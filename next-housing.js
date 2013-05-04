@@ -12,9 +12,13 @@ data.child('spots').on('child_added', function(snapshot) {
 });
 
 /* Personal data */
-myName = "KevinChen" // Change after using AUTH
-myRank = 12 // Change after parsing site.
-myYear = 2015 // Change after parsing site.
+
+data.on('value', function(snapshot) {
+    dat = snapshot.val();
+    myRank = dat.ranks[myName].rank // Change after parsing site.
+    myYear = dat.ranks[myName].year // Change after parsing site.
+});
+
 chosenRooms = new Array();
 
 /* For OpenLayer */
