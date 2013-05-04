@@ -82,8 +82,8 @@ function init() {
         layers: [
             new OpenLayers.Layer.Image( '3rd Floor', 'http://web.mit.edu/kyc2915/Public/Images/W71_3.png',
                 new OpenLayers.Bounds(-180, -90, 180, 90),
-                new OpenLayers.Size(1400, 800),
-                {numZoomLevels: 4, isBaseLayer: true}
+                new OpenLayers.Size(900, 500),
+                {numZoomLevels: 5, isBaseLayer: true}
             ),
             vectorLayer,
         ],
@@ -113,9 +113,9 @@ function chooseRoom(room, priority, update) {
     if (update) {
         data.child('rooms').child(room).child(myName).set({'year': myYear, 'rank': myRank, 'priority': priority});
         data.child('rooms').child(room).child(myName).setPriority(myYear * 1000 + myRank);
-        chosenRooms[priority] = room;
     }
-    $('#priority' + priority).toggle();
+    chosenRooms[priority] = room;
+    $('#priority' + priority).hide();
     $('#remove' + priority).html('Room ' + room + '<a href="#" id="remove' + priority + '">Remove</a>');
     $('#choice' + priority).hide();
     document.getElementById('remove' + priority).onclick = function() {
@@ -128,7 +128,7 @@ function deletePriority(priority, update) {
     if (update) {
         data.child('rooms').child(chosenRooms[priority]).child(myName).remove();
     }
-    $('#priority' + priority).toggle();
+    $('#choice' + priority).show();
     $('#remove' + priority).html('');
 }
 
@@ -141,6 +141,11 @@ data.on('value', function (snapshot) {
     for (i in Object.keys(obj.rooms)) {
         var roomNum = Object.keys(obj.rooms)[i];
         data.child('rooms').child(roomNum).on('child_added', function(snapshot2) {
+            var name = snapshot2.name();
+            if (name == myName) {
+                chooseRoom(roomNum, snapshot2.val().priority, false);
+            }
+
             var point = new OpenLayers.Geometry.Point(lons[roomNum], lats[roomNum]);
             var pointFeature = new OpenLayers.Feature.Vector(point);
             pointFeature.attributes = {
