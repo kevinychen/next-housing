@@ -16,8 +16,12 @@ h2{
   padding: 10px 15px 10px 15px;
   background-color: #FFBA24;
   color: #ffffff;
+  height: 60px;
 }
 .map{
+  top: 14px;
+  margin-top: 20px;
+  padding: 20px;
   border: #dddddd 1px solid;
 }
 .roomlisting{
@@ -65,4 +69,22 @@ th{
   text-align: left;
   font-weight: bold;
   padding: 2px;
+}
+.floorbtn{
+  text-align: center;
+  background-color: #FFD829;
+  height: 60px;
+  padding: 24px;
+  position: absolute;
+  border-left: #ffffff 1px solid;
+  color: #A68C16;
+}
+.floorbtn:hover{
+  opacity: 0.8;
+  cursor: pointer;
+}
+em{
+  font-family: "arial";
+  font-weight: 900;
+  color: #000000;
 }

@@ -15,24 +15,27 @@
 			function nameTag(r, n){
 				return "<div class='nametag'><span class='rank'>" + r + "</span>" + n + "</div>";
 			}
+
 			function moreTag(roomNum,k){
 				return "<div id='fullroombtn" + roomNum + "' class='hiddenlistbtn moretag'>+ " + k +" more</div>";
 			}
 
 			$(document).ready(function(){
 				var numRooms = 74;
-				var html = "<table>";
-				html += "<tr><th>Room</th><th>Contestants</th></tr>";
-				for (i = 1; i < numRooms; i ++){
-					roomNum = i + 200;
-					html += "<tr>";
-					html += "<td class='roomnum-table'>" + roomNum + "</td>";
-					html += "<td id='room" + roomNum +"'>untaken</td>";
-					html += "</tr>";
-				}
-				html += "</table>"
-				$("#floor2 .roomlisting").html(html);
 
+				for (floor = 2; floor <= 5; floor ++){
+					var html = "<table>";
+					html += "<tr><th>Room</th><th>Contestants</th></tr>";
+					for (i = 1; i < numRooms; i ++){
+						roomNum = i + floor * 100;
+						html += "<tr>";
+						html += "<td class='roomnum-table'>" + roomNum + "</td>";
+						html += "<td id='room" + roomNum +"'>untaken</td>";
+						html += "</tr>";
+					}
+					html += "</table>";
+					$("#floor" + floor + " .roomlisting").html(html);
+				}
 
 				var data = new Firebase('https://kyc.firebaseIO.com/');
 				data.on('value', function(snapshot) {
@@ -88,13 +91,26 @@
 		 	</div>
 		</div>
 		<div class="row">
-			<div class="large-12 columns instructions">
+			<div class="large-8 columns instructions">
 				<h2>Hello There</h2>
 				<p>
 					You are going on an adventure. A far away land.
 				</p>
 		 	</div>
+			<div class="large-1 columns floorbtn"> 
+				FLOOR <em>2</em>
+		 	</div>
+			<div class="large-1 columns floorbtn">
+				FLOOR <em>3</em>
+		 	</div>
+			<div class="large-1 columns floorbtn">
+				FLOOR <em>4</em>
+		 	</div>
+			<div class="large-1 columns floorbtn">
+				FLOOR <em>5</em>
+		 	</div>
 		</div>
+		<!-- floor 2 -->
 		<div class="row">
 			<div class="large-12 columns floorheaders">
 				FLOOR 2
@@ -106,9 +122,61 @@
 			</div>
 			<div class="large-10 columns">
 				<div class='map'>
-					map
+					map of <b>FLOOR 2</b> goes here
 				</div>
 			</div>
 		</div>
+
+		<!-- floor 3, you're moving up in life now. -->
+		<div class="row">
+			<div class="large-12 columns floorheaders">
+				FLOOR 3
+		 	</div>
+		</div>
+		<div id="floor3" class="row">
+			<div class="large-2 columns roomlisting">
+				<!-- roomlistings -->
+			</div>
+			<div class="large-10 columns">
+				<div class='map'>
+					map of <b>FLOOR 3</b> goes here
+				</div>
+			</div>
+		</div>
+
+		<!-- floor 4, now we're talking. -->
+		<div class="row">
+			<div class="large-12 columns floorheaders">
+				FLOOR 4
+		 	</div>
+		</div>
+		<div id="floor4" class="row">
+			<div class="large-2 columns roomlisting">
+				<!-- roomlistings -->
+			</div>
+			<div class="large-10 columns">
+				<div class='map'>
+					map of <b>FLOOR 4</b> goes here
+				</div>
+			</div>
+		</div>
+
+		<!-- floor 5, aww, you broke it. -->
+		<div class="row">
+			<div class="large-12 columns floorheaders">
+				FLOOR 5
+		 	</div>
+		</div>
+		<div id="floor5" class="row">
+			<div class="large-2 columns roomlisting">
+				<!-- roomlistings -->
+			</div>
+			<div class="large-10 columns">
+				<div class='map'>
+					map of <b>FLOOR 5</b> goes here
+				</div>
+			</div>
+		</div>
+
 	</body>
 </html>
