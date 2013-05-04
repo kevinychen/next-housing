@@ -103,6 +103,18 @@ function init() {
     var click = new OpenLayers.Control.Click();
     map.addControl(click);
     click.activate();
+
+    for (var roomNum = 200; roomNum <= 600; roomNum++) {
+        selector = $("#plus" + roomNum);
+        if (selector.length){
+            selector.click(function(){
+                var id = $(this).attr('id');
+                var roomNumC = id.match(/[0-9]+/)[0];
+                console.log(roomNumC);
+                chooseRoom(roomNumC, currSelectRoom, true);
+            });
+        }
+    }
 };
 
 
@@ -115,12 +127,12 @@ function chooseRoom(room, priority, update) {
         data.child('rooms').child(room).child(myName).setPriority(myYear * 1000 + myRank);
     }
     chosenRooms[priority] = room;
-    $('#priority' + priority).hide();
     $('#remove' + priority).html('Room ' + room + '<a href="#" id="remove' + priority + '">Remove</a>');
     $('#choice' + priority).hide();
     document.getElementById('remove' + priority).onclick = function() {
         deletePriority(priority, true);
     }
+    disableChoosing();
 };
 
 // Delete the room with the given priority
@@ -130,6 +142,27 @@ function deletePriority(priority, update) {
     }
     $('#choice' + priority).show();
     $('#remove' + priority).html('');
+    disableChoosing();
+}
+
+
+/* random stuff */
+
+function enableChoosing(priority){
+    $(".chooseroombtnlist").show();
+    $("#choice" + priority).css({"background-color": "#B38217"});
+    $("#choice" + priority).css({"border": "#FFBA24 1px solid"});
+    currSelectRoom = priority;
+}
+function disableChoosing(){
+    $(".chooseroombtnlist").hide();
+    $("#choice1").css({"background-color": "#FFBA24"});
+    $("#choice1").css({"border": "#FFBA24 1px solid"});
+    $("#choice2").css({"background-color": "#FFBA24"});
+    $("#choice2").css({"border": "#FFBA24 1px solid"});
+    $("#choice3").css({"background-color": "#FFBA24"});
+    $("#choice3").css({"border": "#FFBA24 1px solid"});
+    currSelectRoom = false;
 }
 
 
@@ -153,7 +186,11 @@ data.on('value', function (snapshot) {
             };
             vectorLayer.addFeatures([pointFeature]);
         });
-        // TODO Update on deletions.
+        data.child('rooms').child(roomNum).on('child_removed', function(snapshot2) {
+            var point = new OpenLayers.Geometry.Point(lons[roomNum], lats[roomNum]);
+            var pointFeature = new OpenLayers.Feature.Vector(point);
+            vectorLayer.removeFeatures([pointFeature]);
+        });
     }
 });
 

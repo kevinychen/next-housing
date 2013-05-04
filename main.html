@@ -30,8 +30,10 @@
 					for (i = 1; i < numRooms; i ++){
 						roomNum = i + floor * 100;
 						html += "<tr>";
+
 						html += "<td class='roomnum-table'>" + roomNum + " <img src='style/solarsing.png' /></td>";
-						html += "<td id='room" + roomNum +"'>untaken</td><td class='chooseroombtnlist'><a title='choose this room' href='#'>+</a></td>";
+						html += "<td id='room" + roomNum +"'>untaken</td><td class='chooseroombtnlist'><a title='choose this room' href='#' id='plus" + roomNum + "'>+</a></td>";
+
 						html += "</tr>";
 					}
 					html += "</table>";
@@ -41,6 +43,7 @@
 				var data = new Firebase('https://kyc.firebaseIO.com/');
 				data.on('value', function(snapshot) {
 					obj = snapshot.val();
+                    console.log(obj);
 					for (k in Object.keys(obj.rooms)){
 						roomNum = Object.keys(obj.rooms)[k]
 						contestantslist = Object.keys(obj.rooms[roomNum]);
@@ -163,23 +166,7 @@
 					}
 				});
 
-				function enableChoosing(priority){
-					$(".chooseroombtnlist").show();
-					$("#choice" + priority).css({"background-color": "#B38217"});
-					$("#choice" + priority).css({"border": "#FFBA24 1px solid"});
-					currSelectRoom = priority;
-				}
-				function disableChoosing(){
-					$(".chooseroombtnlist").hide();
-					$("#choice1").css({"background-color": "#FFBA24"});
-					$("#choice1").css({"border": "#FFBA24 1px solid"});
-					$("#choice2").css({"background-color": "#FFBA24"});
-					$("#choice2").css({"border": "#FFBA24 1px solid"});
-					$("#choice3").css({"background-color": "#FFBA24"});
-					$("#choice3").css({"border": "#FFBA24 1px solid"});
-					currSelectRoom = false;
-				}
-
+                // moved enableChoosing & disableChoosing to next-housing.js.
 			});
 		</script>
         <script type="text/javascript" src="next-housing.js"></script>
