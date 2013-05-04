@@ -52,7 +52,7 @@
 
 				var data = new Firebase('https://kyc.firebaseIO.com/');
 				data.on('value', function(snapshot) {
-					
+
 					obj = snapshot.val();
                     console.log(obj);
 					for (k in Object.keys(obj.rooms)){
@@ -293,13 +293,13 @@
 			</div>
 		</div>
 		<div id='footer'>
-			Hello, Victor
+			Hello, Victor Hung.
 			<div id='choice1' class='choiceRoomBtn'>Choose #1</div>
+			<div id='remove1' class='choiceRoomBtn'></div>
 			<div id='choice2' class='choiceRoomBtn'>Choose #2</div>
+			<div id='remove2' class='choiceRoomBtn'></div>
 			<div id='choice3' class='choiceRoomBtn'>Choose #3</div>
-			<div id='remove1'></div>
-			<div id='remove2'></div>
-			<div id='remove3'></div>
+			<div id='remove3' class='choiceRoomBtn'></div>
 			<div id='shortcuts'>
 				Jump to: 
 				<a href="#floor2anchor">Floor 2</a>
