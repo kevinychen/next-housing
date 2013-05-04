@@ -112,6 +112,7 @@ function init() {
 function chooseRoom(room, priority, update) {
     if (update) {
         data.child('rooms').child(room).child(myName).set({'year': myYear, 'rank': myRank, 'priority': priority});
+        data.child('rooms').child(room).child(myName).setPriority(myYear * 1000 + myRank);
         chosenRooms[priority] = room;
     }
     $('#priority' + priority).toggle();
