@@ -8,34 +8,31 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script src='https://cdn.firebase.com/v0/firebase.js'></script>
 		<!--
+            <link rel="stylesheet" href="style.css">
+            <script src="OpenLayers.js"></script>
 			<script type="text/javascript" src="next-housing.js"></script>
 		-->
 		<script>
 			// to be moved to a seperate file later, I'm a little lazy
-			function nameTag(r, n){
-				return "<div class='nametag'><span class='rank'>" + r + "</span>" + n + "</div>";
-			}
-
-			function moreTag(roomNum,k){
-				return "<div id='fullroombtn" + roomNum + "' class='hiddenlistbtn moretag'>+ " + k +" more</div>";
+			function nameTag(n){
+				return "<span class='nametag'>" + n + "</span>";
 			}
 
 			$(document).ready(function(){
 				var numRooms = 74;
-
-				for (floor = 2; floor <= 5; floor ++){
-					var html = "<table>";
-					html += "<tr><th>Room</th><th>Contestants</th></tr>";
-					for (i = 1; i < numRooms; i ++){
-						roomNum = i + floor * 100;
-						html += "<tr>";
-						html += "<td class='roomnum-table'>" + roomNum + "</td>";
-						html += "<td id='room" + roomNum +"'>untaken</td><td><a title='choose this room' href='#'>+</a></td>";
-						html += "</tr>";
-					}
-					html += "</table>";
-					$("#floor" + floor + " .roomlisting").html(html);
+				var html = "<table>";
+				html += "<tr><th>Room</th><th>Top Occupant</th></tr>";
+				for (i = 1; i < numRooms; i ++){
+					roomNum = i + 200;
+					html += "<tr>";
+					html += "<td>" + roomNum + "</td>";
+					html += "<td id='room" + roomNum +"'>empty</td>";
+					html += "</tr>";
+					console.log(html);
 				}
+				html += "</table>"
+				$("#floor2 .roomlisting").html(html);
+
 
 				var data = new Firebase('https://kyc.firebaseIO.com/');
 				data.on('value', function(snapshot) {
@@ -44,43 +41,12 @@
 						roomNum = Object.keys(obj.rooms)[k]
 						contestantslist = Object.keys(obj.rooms[roomNum]);
 						html = ""
-
-						if (contestantslist.length > 0){
-							contestant = contestantslist[0];
-							r = obj.rooms[roomNum][contestant].rank;
-							html += nameTag(r, contestant);
-
-							// if more than one person
-							if (contestantslist.length > 1){
-								html += "<div id='fullroom" + roomNum + "' class='hiddenlist' style='display:none'>";
-								// people who are not the first
-								for (i in contestantslist){
-									if (i != 0){
-										contestant = contestantslist[i];
-										r = obj.rooms[roomNum][contestant].rank;
-										html += nameTag(r, contestantslist[i]);
-									}
-								}
-								nummore = contestantslist.length - 1
-								html += "</div>";
-								html += moreTag(roomNum, nummore);
-
-								selector = $("#fullroombtn" + roomNum);
-								$("#room" + roomNum).on("click", selector, function(){
-									roomid = $(this).attr('id')
-									$("#" + roomid + " .hiddenlist").show();
-									$("#" + roomid + " .hiddenlistbtn").hide();
-								});
-							}
+						for (i in contestantslist){
+							html += nameTag(contestantslist[i]);
 						}
-
 						$("#room" + roomNum).html(html);
 					}
 
-				});
-
-				$("tr").hover(function(){
-					console.log($(this));
 				});
 
 			});
@@ -95,38 +61,11 @@
 		 	</div>
 		</div>
 		<div class="row">
-			<div class="large-8 columns instructions">
+			<div class="large-12 columns instructions">
 				<h2>Hello There</h2>
 				<p>
 					You are going on an adventure. A far away land.
 				</p>
-		 	</div>
-			<a href="#floor2anchor">
-			<div class="large-1 columns floorbtn"> 
-					FLOOR <em>2</em>
-		 	</div>
-			</a>
-			<a href="#floor3anchor">
-			<div class="large-1 columns floorbtn">
-				FLOOR <em>3</em>
-		 	</div>
-			</a>
-			<a href="#floor4anchor">
-			<div class="large-1 columns floorbtn">
-				FLOOR <em>4</em>
-		 	</div>
-			</a>
-			<a href="#floor5anchor">
-			<div class="large-1 columns floorbtn">
-				FLOOR <em>5</em>
-		 	</div>
-			</a>
-		</div>
-		<!-- floor 2 -->
-		<a name="floor2anchor"></a>
-		<div class="row">
-			<div class="large-12 columns floorheaders">
-				FLOOR 2
 		 	</div>
 		</div>
 		<div id="floor2" class="row">
@@ -135,64 +74,9 @@
 			</div>
 			<div class="large-10 columns">
 				<div class='map'>
-					map of <b>FLOOR 2</b> goes here
+					map
 				</div>
 			</div>
 		</div>
-
-		<!-- floor 3, you're moving up in life now. -->
-		<a name="floor3anchor"></a>
-		<div class="row">
-			<div class="large-12 columns floorheaders">
-				FLOOR 3
-		 	</div>
-		</div>
-		<div id="floor3" class="row">
-			<div class="large-2 columns roomlisting">
-				<!-- roomlistings -->
-			</div>
-			<div class="large-10 columns">
-				<div class='map'>
-					map of <b>FLOOR 3</b> goes here
-				</div>
-			</div>
-		</div>
-
-		<!-- floor 4, now we're talking. -->
-		<a name="floor4anchor"></a>
-		<div class="row">
-			<div class="large-12 columns floorheaders">
-				FLOOR 4
-		 	</div>
-		</div>
-		<div id="floor4" class="row">
-			<div class="large-2 columns roomlisting">
-				<!-- roomlistings -->
-			</div>
-			<div class="large-10 columns">
-				<div class='map'>
-					map of <b>FLOOR 4</b> goes here
-				</div>
-			</div>
-		</div>
-
-		<!-- floor 5, aww, you broke it. -->
-		<a name="floor5anchor"></a>
-		<div class="row">
-			<div class="large-12 columns floorheaders">
-				FLOOR 5
-		 	</div>
-		</div>
-		<div id="floor5" class="row">
-			<div class="large-2 columns roomlisting">
-				<!-- roomlistings -->
-			</div>
-			<div class="large-10 columns">
-				<div class='map'>
-					map of <b>FLOOR 5</b> goes here
-				</div>
-			</div>
-		</div>
-
 	</body>
 </html>

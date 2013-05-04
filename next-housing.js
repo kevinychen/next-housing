@@ -52,8 +52,31 @@ OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
     }
 });
 
-var map, layer;
+var map, layer, vectorLayer;
 function init() {
+    var renderer = OpenLayers.Util.getParameters(window.location.href).renderer;
+    renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;
+	vectorLayer = new OpenLayers.Layer.Vector("Simple Geometry", {
+        styleMap: new OpenLayers.StyleMap({'default':{
+            strokeColor: "#00FF00",
+            strokeOpacity: 1,
+            strokeWidth: 3,
+            fillColor: "#FF5500",
+            fillOpacity: 0.5,
+            pointRadius: 6,
+            pointerEvents: "visiblePainted",
+            label: "${name}",
+
+            fontColor: "black",
+            fontSize: "20px",
+            fontFamily: "Courier New, monospace",
+            fontWeight: "bold",
+            labelOutlineColor: "white",
+            labelOutlineWidth: 3
+        }}),
+            renderers: renderer
+    });
+
     map = new OpenLayers.Map({
         div: 'map',
         layers: [
@@ -61,7 +84,9 @@ function init() {
                 new OpenLayers.Bounds(-180, -90, 180, 90),
                 new OpenLayers.Size(1600, 900),
                 {numZoomLevels: 4, isBaseLayer: true}
-            )],
+            ),
+            vectorLayer,
+        ],
         controls: [
             new OpenLayers.Control.Navigation({
                 dragPanOptions: {
@@ -104,4 +129,24 @@ function deletePriority(priority, update) {
     $('#priority' + priority).toggle();
     $('#remove' + priority).html('');
 }
+
+
+/* Sync with database */
+
+
+data.on('value', function (snapshot) {
+    var obj = snapshot.val();
+    for (i in Object.keys(obj.rooms)) {
+        var roomNum = Object.keys(obj.rooms)[i];
+        data.child('rooms').child(roomNum).on('child_added', function(snapshot2) {
+            var point = new OpenLayers.Geometry.Point(lons[roomNum], lats[roomNum]);
+            var pointFeature = new OpenLayers.Feature.Vector(point);
+            pointFeature.attributes = {
+                name: snapshot2.name()
+            };
+            vectorLayer.addFeatures([pointFeature]);
+        });
+        // TODO Update on deletions.
+    }
+});
 
