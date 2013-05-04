@@ -10,15 +10,10 @@ data.child('spots').on('child_added', function(snapshot) {
 });
 
 /* Personal data */
-myName = "Kevin Chen" // Change after using AUTH
+myName = "KevinChen" // Change after using AUTH
 myRank = 12 // Change after parsing site.
+myYear = 2015 // Change after parsing site.
 chosenRooms = new Array();
-data.child('wants').on('child_added', function(snapshot) {
-    if (snapshot.val().name == myName) {
-        var priority = snapshot.val().priority;
-        chosenRooms[priority] = snapshot;
-    }
-});
 
 /* For OpenLayer */
 
@@ -49,7 +44,11 @@ OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
                 minDist = dist;
             }
         }
-//        alert(minRoom);
+
+        var val = $('input[name=priority]:checked').val();
+        if (val) {
+            chooseRoom(minRoom, parseInt(val), true);
+        }
     }
 });
 
@@ -85,12 +84,24 @@ function init() {
 /* Database update functions */
 
 // Priority should be 1, 2, or 3
-function chooseRoom(room, priority) {
-    chosenRooms[priority] = data.child('wants').push({'name': 'Kevin Chen', 'room': room, 'year': '2015', 'rank': '12', 'priority': priority});
+function chooseRoom(room, priority, update) {
+    if (update) {
+        data.child('rooms').child(room).child(myName).set({'year': myYear, 'rank': myRank, 'priority': priority});
+        chosenRooms[priority] = room;
+    }
+    $('#priority' + priority).toggle();
+    $('#remove' + priority).html('Room ' + room + '<a href="#" id="remove' + priority + '">Remove</a>');
+    document.getElementById('remove' + priority).onclick = function() {
+        deletePriority(priority, true);
+    }
 };
 
 // Delete the room with the given priority
-function deletePriority(priority) {
-    chosenRooms[priority].remove();
+function deletePriority(priority, update) {
+    if (update) {
+        data.child('rooms').child(chosenRooms[priority]).child(myName).remove();
+    }
+    $('#priority' + priority).toggle();
+    $('#remove' + priority).html('');
 }
 
