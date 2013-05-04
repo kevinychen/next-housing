@@ -145,3 +145,11 @@ tr a:hover{
 .chooseroombtnlist{
   display: none;
 }
+.choiceRoomBtn a, .choiceRoomBtn:visited a{
+  margin-left: 8px;
+  position: relative;
+  bottom: 2px;
+  color: #ED5826;
+  font-size: 12px;
+  vertical-align: center;
+}
