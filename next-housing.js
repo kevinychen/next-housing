@@ -9,6 +9,17 @@ data.child('spots').on('child_added', function(snapshot) {
     lons[roomNum] = snapshot.val().lon;
 });
 
+/* Personal data */
+myName = "Kevin Chen" // Change after using AUTH
+myRank = 12 // Change after parsing site.
+chosenRooms = new Array();
+data.child('wants').on('child_added', function(snapshot) {
+    if (snapshot.val().name == myName) {
+        var priority = snapshot.val().priority;
+        chosenRooms[priority] = snapshot;
+    }
+});
+
 /* For OpenLayer */
 
 OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
@@ -69,4 +80,17 @@ function init() {
     map.addControl(click);
     click.activate();
 };
+
+
+/* Database update functions */
+
+// Priority should be 1, 2, or 3
+function chooseRoom(room, priority) {
+    chosenRooms[priority] = data.child('wants').push({'name': 'Kevin Chen', 'room': room, 'year': '2015', 'rank': '12', 'priority': priority});
+};
+
+// Delete the room with the given priority
+function deletePriority(priority) {
+    chosenRooms[priority].remove();
+}
 
