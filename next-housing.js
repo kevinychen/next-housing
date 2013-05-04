@@ -1,6 +1,13 @@
 
 /* For Firebase */
 var data = new Firebase('https://kyc.firebaseIO.com/');
+lats = new Array();
+lons = new Array();
+data.child('spots').on('child_added', function(snapshot) {
+    var roomNum = snapshot.val().room;
+    lats[roomNum] = snapshot.val().lat;
+    lons[roomNum] = snapshot.val().lon;
+});
 
 /* For OpenLayer */
 
@@ -21,6 +28,17 @@ OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
 
     trigger: function(e) {
         var lonlat = map.getLonLatFromPixel(e.xy);
+
+        var minRoom = -1;
+        var minDist = 999999;
+        for (var roomNum = 301; roomNum <= 376; roomNum++) {
+            var dist = Math.abs(lats[roomNum] - lonlat.lat) + Math.abs(lons[roomNum] - lonlat.lon);
+            if (dist < minDist) {
+                minRoom = roomNum;
+                minDist = dist;
+            }
+        }
+//        alert(minRoom);
     }
 });
 
