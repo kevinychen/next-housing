@@ -20,6 +20,7 @@
 			}
 
 			$(document).ready(function(){
+
 				var numRooms = 74;
 				currSelectRoom = false;
 
@@ -76,6 +77,54 @@
 
 						$("#room" + roomNum).html(html);
 					}
+
+
+
+
+				f2 = $("#floorheader2").position().top;
+				f3 = $("#floorheader3").position().top;
+				f4 = $("#floorheader4").position().top;
+				f5 = $("#floorheader5").position().top;
+
+				$(document).scroll(function() {
+
+					if (window.pageYOffset > f2){
+						$("#floorheader2").css({"position": "fixed"});
+						$("#floorheader2").css({"top": "0"});
+						$("#floorheader2").css({"z-index": "100"});
+					} else {
+						$("#floorheader2").css({"position": "relative"});
+					}
+
+					if (window.pageYOffset > f3){
+						$("#floorheader3").css({"position": "fixed"});
+						$("#floorheader3").css({"top": "0"});
+						$("#floorheader3").css({"z-index": "101"});
+					} else {
+						$("#floorheader3").css({"position": "relative"});
+					}
+
+					if (window.pageYOffset > f4){
+						$("#floorheader4").css({"position": "fixed"});
+						$("#floorheader4").css({"top": "0"});
+						$("#floorheader4").css({"z-index": "102"});
+					} else {
+						$("#floorheader4").css({"position": "relative"});
+					}
+
+					if (window.pageYOffset > f5){
+						$("#floorheader5").css({"position": "fixed"});
+						$("#floorheader5").css({"top": "0"});
+						$("#floorheader5").css({"z-index": "103"});
+					} else {
+						$("#floorheader5").css({"position": "relative"});
+					}
+
+				});
+
+
+
+
 
 				});
 
@@ -172,7 +221,7 @@
 		<!-- floor 2 -->
 		<a name="floor2anchor"></a>
 		<div class="row">
-			<div class="large-12 columns floorheaders">
+			<div id="floorheader2" class="large-12 columns floorheaders">
 				FLOOR 2
 		 	</div>
 		</div>
@@ -190,7 +239,7 @@
 		<!-- floor 3, you're moving up in life now. -->
 		<a name="floor3anchor"></a>
 		<div class="row">
-			<div class="large-12 columns floorheaders">
+			<div id="floorheader3" class="large-12 columns floorheaders">
 				FLOOR 3
 		 	</div>
 		</div>
@@ -208,7 +257,7 @@
 		<!-- floor 4, now we're talking. -->
 		<a name="floor4anchor"></a>
 		<div class="row">
-			<div class="large-12 columns floorheaders">
+			<div id="floorheader4" class="large-12 columns floorheaders">
 				FLOOR 4
 		 	</div>
 		</div>
@@ -226,7 +275,7 @@
 		<!-- floor 5, aww, you broke it. -->
 		<a name="floor5anchor"></a>
 		<div class="row">
-			<div class="large-12 columns floorheaders">
+			<div id="floorheader5" class="large-12 columns floorheaders">
 				FLOOR 5
 		 	</div>
 		</div>
