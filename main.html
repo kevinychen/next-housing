@@ -30,7 +30,7 @@
 						roomNum = i + floor * 100;
 						html += "<tr>";
 						html += "<td class='roomnum-table'>" + roomNum + "</td>";
-						html += "<td id='room" + roomNum +"'>untaken</td>";
+						html += "<td id='room" + roomNum +"'>untaken</td><td><a title='choose this room' href='#'>+</a></td>";
 						html += "</tr>";
 					}
 					html += "</table>";
@@ -79,6 +79,10 @@
 
 				});
 
+				$("tr").hover(function(){
+					console.log($(this));
+				});
+
 			});
 		</script>
 	</head>
@@ -97,20 +101,29 @@
 					You are going on an adventure. A far away land.
 				</p>
 		 	</div>
+			<a href="#floor2anchor">
 			<div class="large-1 columns floorbtn"> 
-				FLOOR <em>2</em>
+					FLOOR <em>2</em>
 		 	</div>
+			</a>
+			<a href="#floor3anchor">
 			<div class="large-1 columns floorbtn">
 				FLOOR <em>3</em>
 		 	</div>
+			</a>
+			<a href="#floor4anchor">
 			<div class="large-1 columns floorbtn">
 				FLOOR <em>4</em>
 		 	</div>
+			</a>
+			<a href="#floor5anchor">
 			<div class="large-1 columns floorbtn">
 				FLOOR <em>5</em>
 		 	</div>
+			</a>
 		</div>
 		<!-- floor 2 -->
+		<a name="floor2anchor"></a>
 		<div class="row">
 			<div class="large-12 columns floorheaders">
 				FLOOR 2
@@ -128,6 +141,7 @@
 		</div>
 
 		<!-- floor 3, you're moving up in life now. -->
+		<a name="floor3anchor"></a>
 		<div class="row">
 			<div class="large-12 columns floorheaders">
 				FLOOR 3
@@ -145,6 +159,7 @@
 		</div>
 
 		<!-- floor 4, now we're talking. -->
+		<a name="floor4anchor"></a>
 		<div class="row">
 			<div class="large-12 columns floorheaders">
 				FLOOR 4
@@ -162,6 +177,7 @@
 		</div>
 
 		<!-- floor 5, aww, you broke it. -->
+		<a name="floor5anchor"></a>
 		<div class="row">
 			<div class="large-12 columns floorheaders">
 				FLOOR 5

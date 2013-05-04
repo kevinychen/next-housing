@@ -70,6 +70,9 @@ th{
   font-weight: bold;
   padding: 2px;
 }
+tr:hover{
+  background-color: #ffffff;
+}
 .floorbtn{
   text-align: center;
   background-color: #FFD829;
@@ -87,4 +90,15 @@ em{
   font-family: "arial";
   font-weight: 900;
   color: #000000;
+}
+a{
+  text-decoration: none;
+}
+tr a, tr a:visited{
+  font-weight: bold;
+  color: #666666;
+  padding: 5px;
+}
+tr a:hover{
+  color: #999999;
 }
