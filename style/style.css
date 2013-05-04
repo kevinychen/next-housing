@@ -128,6 +128,8 @@ tr a:hover{
   padding: 3px;
   color: #ffffff;
   background-color: #FFBA24;
+  border: 1px solid #FFBA24;
+
   -webkit-border-radius: 3px;
   border-radius: 3px;
   display: inline-block;
@@ -136,4 +138,7 @@ tr a:hover{
 .choiceRoomBtn:hover{
   cursor: pointer;
   opacity: 0.6;
+}
+.chooseroombtnlist{
+  display: none;
 }

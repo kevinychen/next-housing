@@ -24,6 +24,7 @@
 
 			$(document).ready(function(){
 				var numRooms = 74;
+				var currSelectRoom = false;
 
 				for (floor = 2; floor <= 5; floor ++){
 					var html = "<table>";
@@ -32,7 +33,7 @@
 						roomNum = i + floor * 100;
 						html += "<tr>";
 						html += "<td class='roomnum-table'>" + roomNum + "</td>";
-						html += "<td id='room" + roomNum +"'>untaken</td><td><a title='choose this room' href='#'>+</a></td>";
+						html += "<td id='room" + roomNum +"'>untaken</td><td class='chooseroombtnlist'><a title='choose this room' href='#'>+</a></td>";
 						html += "</tr>";
 					}
 					html += "</table>";
@@ -84,6 +85,50 @@
 				$("tr").hover(function(){
 					console.log($(this));
 				});
+
+				$("#choice1").click(function(){
+					if (currSelectRoom != 1){
+						disableChoosing();
+						enableChoosing(1);
+					} else {
+						disableChoosing();
+					}
+				});
+
+				$("#choice2").click(function(){
+					if (currSelectRoom != 2){
+						disableChoosing();
+						enableChoosing(2);
+					} else {
+						disableChoosing();
+					}
+				});
+
+				$("#choice3").click(function(){
+					if (currSelectRoom != 3){
+						disableChoosing();
+						enableChoosing(3);
+					} else {
+						disableChoosing();
+					}
+				});
+
+				function enableChoosing(priority){
+					$(".chooseroombtnlist").show();
+					$("#choice" + priority).css({"background-color": "#B38217"});
+					$("#choice" + priority).css({"border": "#FFBA24 1px solid"});
+					currSelectRoom = priority;
+				}
+				function disableChoosing(){
+					$(".chooseroombtnlist").hide();
+					$("#choice1").css({"background-color": "#FFBA24"});
+					$("#choice1").css({"border": "#FFBA24 1px solid"});
+					$("#choice2").css({"background-color": "#FFBA24"});
+					$("#choice2").css({"border": "#FFBA24 1px solid"});
+					$("#choice3").css({"background-color": "#FFBA24"});
+					$("#choice3").css({"border": "#FFBA24 1px solid"});
+					currSelectRoom = false;
+				}
 
 			});
 		</script>
