@@ -398,6 +398,7 @@ function chooseRoom(room, priority, update) {
     if (update) {
         data.child('rooms').child(room).child(myName).set({'year': myYear, 'rank': myRank, 'priority': priority});
         data.child('rooms').child(room).child(myName).setPriority(myYear * 1000 + myRank);
+        data.child('log').push({'name': myName, 'room': room, 'priority': priority, 'action': 'choose'});
     }
     chosenRooms[priority] = room;
     $('#remove' + priority).html('Room ' + room + '<a href="#" id="remove' + priority + '">Remove</a>');
@@ -414,6 +415,7 @@ function chooseRoom(room, priority, update) {
 function deletePriority(priority, update) {
     if (update) {
         data.child('rooms').child(chosenRooms[priority]).child(myName).remove();
+        data.child('log').push({'name': myName, 'room': chosenRooms[priority], 'priority': priority, 'action': 'remove'});
     }
     $('#choice' + priority).show();
     $('#remove' + priority).html('');
