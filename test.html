@@ -1,0 +1,77 @@
+
+<!DOCTYPE HTML>
+  <head>
+    <title>OpenLayers Labeled Features Example</title>
+
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script src="OpenLayers.js"></script>
+    <script type="text/javascript">
+        var map;
+
+        function init(){
+            map = new OpenLayers.Map('map');
+            
+            var layer = new OpenLayers.Layer.Image( "OpenLayers WMS", 
+                    "http://web.mit.edu/kyc2915/Public/Images/W71_3.png",
+                    new OpenLayers.Bounds(-180, -90, 180, 90),
+                    new OpenLayers.Size(1600, 900),
+                    {numZoomLevels: 4, isBaseLayer: true}
+                    );
+            map.addLayer(layer);
+            
+            // allow testing of specific renderers via "?renderer=Canvas", etc
+            var renderer = OpenLayers.Util.getParameters(window.location.href).renderer;
+            renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;
+            
+            var vectorLayer = new OpenLayers.Layer.Vector("Simple Geometry", {
+                styleMap: new OpenLayers.StyleMap({'default':{
+                    strokeColor: "#00FF00",
+                    strokeOpacity: 1,
+                    strokeWidth: 3,
+                    fillColor: "#FF5500",
+                    fillOpacity: 0.5,
+                    pointRadius: 6,
+                    pointerEvents: "visiblePainted",
+                    // label with \n linebreaks
+                    label : "name: ${name}\n\nage: ${age}",
+                    
+                    fontSize: "12px",
+                    fontFamily: "Courier New, monospace",
+                    fontWeight: "bold",
+                    labelOutlineColor: "white",
+                    labelOutlineWidth: 3
+                }}),
+                renderers: renderer
+            });
+            
+            // create a point feature
+            var point = new OpenLayers.Geometry.Point(-111.04, 45.68);
+            var pointFeature = new OpenLayers.Feature.Vector(point);
+            pointFeature.attributes = {
+                name: "toto",
+                age: 20,
+                favColor: 'red',
+                align: "cm"
+            };
+            
+            map.addLayer(vectorLayer);
+            map.setCenter(new OpenLayers.LonLat(-109.370078125, 43.39484375), 4);
+            vectorLayer.addFeatures([pointFeature]);
+        }
+    </script>
+  </head>
+  <body onload="init()">
+    <h1 id="title">OpenLayers Labeled features example</h1>
+    <div id="tags">
+        vector, feature, labeling, symbolizer, light
+    </div>
+    <p id="shortdesc">
+        Label vector features with a text symbolizer.
+    </p>
+    <div id="map" class="smallmap"></div>
+    <div id="docs">
+    <p>This example shows drawing simple vector features with a label.</p>
+    </div>
+  </body>
+</html>
+
