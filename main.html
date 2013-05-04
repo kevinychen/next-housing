@@ -30,7 +30,7 @@
 					for (i = 1; i < numRooms; i ++){
 						roomNum = i + floor * 100;
 						html += "<tr>";
-						html += "<td class='roomnum-table'>" + roomNum + "</td>";
+						html += "<td class='roomnum-table'>" + roomNum + " <img src='style/solarsing.png' /></td>";
 						html += "<td id='room" + roomNum +"'>untaken</td><td class='chooseroombtnlist'><a title='choose this room' href='#'>+</a></td>";
 						html += "</tr>";
 					}
@@ -94,6 +94,7 @@
 						$("#floorheader2").css({"z-index": "100"});
 					} else {
 						$("#floorheader2").css({"position": "relative"});
+						$("#floorheader2").css({"z-index": "-1"});
 					}
 
 					if (window.pageYOffset > f3){
@@ -102,6 +103,7 @@
 						$("#floorheader3").css({"z-index": "101"});
 					} else {
 						$("#floorheader3").css({"position": "relative"});
+						$("#floorheader3").css({"z-index": "-1"});
 					}
 
 					if (window.pageYOffset > f4){
@@ -110,6 +112,7 @@
 						$("#floorheader4").css({"z-index": "102"});
 					} else {
 						$("#floorheader4").css({"position": "relative"});
+						$("#floorheader4").css({"z-index": "-1"});
 					}
 
 					if (window.pageYOffset > f5){
@@ -118,6 +121,7 @@
 						$("#floorheader5").css({"z-index": "103"});
 					} else {
 						$("#floorheader5").css({"position": "relative"});
+						$("#floorheader5").css({"z-index": "-1"});
 					}
 
 				});
@@ -190,9 +194,9 @@
 		</div>
 		<div class="row">
 			<div class="large-12 columns instructions">
-				<h2>Hello There</h2>
+				<h2>Hello There. Please Read:</h2>
 				<p>
-					You are going on an adventure. A far away land.
+					Choose the top 3 rooms you'd like to stay in for the 2013-2014 year. Help each other out - avoid conflicts before the lottery!
 				</p>
 		 	</div>
 		 	<!--
