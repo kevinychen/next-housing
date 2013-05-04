@@ -167,3 +167,13 @@ tr a:hover{
   border-style: none none solid solid;
   z-index: 9001;
 }
+.olControlZoomIn, .olControlZoomOut{
+  font-size: 30px;
+  margin-right: 10px;
+  color: #666666;
+  background-color: #cccccc;
+  padding: 3px 6px;
+  display: block;
+  text-align: center;
+  margin-bottom: 5px;
+}

@@ -6,10 +6,10 @@
         <link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" type="text/css" href="style/style.css" />
 		<link rel="stylesheet" type="text/css" href="plugins/foundation/css/foundation.css" />
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="OpenLayers.js"></script>
         <script>
-			myName = "VictorHung" // Change after using AUTH
+			myName = "VictorHungs"
         </script>
 		<script src='https://cdn.firebase.com/v0/firebase.js'></script>
 		<script>
@@ -23,7 +23,7 @@
 			}
 
 			$(document).ready(function(){
-
+				$("#yourname").text(myName);
 				var numRooms = 77;
 				currSelectRoom = false;
 
@@ -300,7 +300,7 @@
 			</div>
 		</div>
 		<div id='footer'>
-			Hello, Victor Hung.
+			Hello, <span id='yourname'></span>.
 			<div id='choice1' class='choiceRoomBtn'>Choose #1</div>
 			<div id='remove1' class='choiceRoomBtn'></div>
 			<div id='choice2' class='choiceRoomBtn'>Choose #2</div>
