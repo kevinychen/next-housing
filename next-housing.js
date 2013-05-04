@@ -1,5 +1,28 @@
 
+/* For Firebase */
+var data = new Firebase('https://kyc.firebaseIO.com/');
+
 /* For OpenLayer */
+
+OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
+    defaultHandlerOptions: {
+        'single': true,
+        'double': false,
+        'pixelTolerance': 0,
+        'stopSingle': false,
+        'stopDouble': false
+    },
+
+    initialize: function(options) {
+        this.handlerOptions = OpenLayers.Util.extend({}, this.defaultHandlerOptions);
+        OpenLayers.Control.prototype.initialize.apply(this, arguments);
+        this.handler = new OpenLayers.Handler.Click(this, {'click': this.trigger}, this.handlerOptions);
+    },
+
+    trigger: function(e) {
+        var lonlat = map.getLonLatFromPixel(e.xy);
+    }
+});
 
 var map, layer;
 function init() {
@@ -23,10 +46,9 @@ function init() {
         center: [0, 0],
         zoom: 0
     });
+
+    var click = new OpenLayers.Control.Click();
+    map.addControl(click);
+    click.activate();
 };
 
-
-/* For Firebase */
-var data = new Firebase('https://kyc.firebaseIO.com/');
-data.on('child_added', function(snapshot) {
-});
