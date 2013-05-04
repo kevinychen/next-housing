@@ -85,7 +85,7 @@ function init() {
     map2 = new OpenLayers.Map({
         div: 'map2',
         layers: [
-            new OpenLayers.Layer.Image( '3rd Floor', 'http://web.mit.edu/kyc2915/Public/Images/W71_3.png',
+            new OpenLayers.Layer.Image( '3rd Floor', 'http://web.mit.edu/kyc2915/Public/Images/W71_2.png',
                 new OpenLayers.Bounds(-180, -90, 180, 90),
                 new OpenLayers.Size(900, 500),
                 {numZoomLevels: 5, isBaseLayer: true}
@@ -259,7 +259,7 @@ function init() {
     map4 = new OpenLayers.Map({
         div: 'map4',
         layers: [
-            new OpenLayers.Layer.Image( '3rd Floor', 'http://web.mit.edu/kyc2915/Public/Images/W71_3.png',
+            new OpenLayers.Layer.Image( '3rd Floor', 'http://web.mit.edu/kyc2915/Public/Images/W71_4.png',
                 new OpenLayers.Bounds(-180, -90, 180, 90),
                 new OpenLayers.Size(900, 500),
                 {numZoomLevels: 5, isBaseLayer: true}
@@ -346,7 +346,7 @@ function init() {
     map5 = new OpenLayers.Map({
         div: 'map5',
         layers: [
-            new OpenLayers.Layer.Image( '3rd Floor', 'http://web.mit.edu/kyc2915/Public/Images/W71_3.png',
+            new OpenLayers.Layer.Image( '3rd Floor', 'http://web.mit.edu/kyc2915/Public/Images/W71_5.png',
                 new OpenLayers.Bounds(-180, -90, 180, 90),
                 new OpenLayers.Size(900, 500),
                 {numZoomLevels: 5, isBaseLayer: true}
